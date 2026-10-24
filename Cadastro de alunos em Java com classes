@@ -1,0 +1,147 @@
+package javaapplication8;
+
+import java.util.Locale;
+import java.util.Scanner;
+
+public class JavaApplication8 {
+    private static double[][] aluno = new double[3][3];
+    private static String[] nomes = new String[3];
+    private static Scanner scanner = new Scanner(System.in);
+        
+    
+    public static void cadastrarNotas() {
+        System.out.println("Cadastro dos alinos");
+        String aluno1, aluno2, aluno3;
+        
+        System.out.println("Digite o nome do aluno 1");
+        aluno1 = scanner.nextLine();
+        
+        System.out.println("Digite o nome do aluno 2");
+        aluno2 = scanner.nextLine();
+        
+        System.out.println("Digite o nome do aluno 3");
+        aluno3 = scanner.nextLine();
+        
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                System.out.print("Digite as notas de [" + (i+1) + "] : ");
+                nomes[i] = scanner.nextLine();
+                aluno[i][j] = scanner.nextDouble();
+            }
+        }
+    }
+    
+    public static double calcularMedia(double[] notasDoEstudante) {
+        double soma = 0;
+        for (int i = 0; i < notasDoEstudante.length; i++) {
+            soma += notasDoEstudante[i];
+        }
+        return soma / notasDoEstudante.length;
+    } // QUESTÃO 4
+    public static void exibirMedias() {
+        System.out.println("Media alunos");
+        for (int i = 0; i < 3; i++) {
+            double media = calcularMedia(aluno[i]);
+            System.out.printf(Locale.US, "Aluno [%d] - Media: %.1f%n", i, media);
+        }
+    }
+
+    // double mediaaluno;
+    // mediaaluno == calcularMedia(aluno[i]);
+     
+    public static int classificarAprovacao(double[] notasDoEstudante) {
+    double media = calcularMedia(notasDoEstudante);
+    int resultado;
+    
+    if (media >= 7.0) {
+        resultado = 0;
+    } else {
+        resultado = 1;
+    }
+    return resultado;
+} // QUESTÃO 5
+    public static void exibirStatus() {
+    System.out.println("Estado dos alunos:");
+    for (int i = 0; i < 3; i++) {
+        int status = classificarAprovacao(aluno[i]); 
+        double media = calcularMedia(aluno[i]);
+        
+        System.out.printf(Locale.US, "Aluno [%d] - Media: %.1f -> ", i, media);
+        
+        if (status == 0) {
+            System.out.println("Aprovado");
+        } else {
+            System.out.println("Reprovado");
+        }
+    }
+}
+    
+    public static void relatorio() {
+    System.out.println("RELATORIO DOS ALUNOS:");
+    
+    double maiorMedia = calcularMedia(aluno[0]);
+        double menorMedia = calcularMedia(aluno[0]);
+        String alunoMaior = nomes[0];
+        String alunoMenor = nomes[0];
+    
+    for (int i = 0; i < 3; i++) {
+        int status = classificarAprovacao(aluno[i]);
+        int a = 0, b = 0, somaA, somaB;
+        double media = calcularMedia(aluno[i]);
+        
+        System.out.printf(Locale.US, "Aluno [%d] - Media: %.1f -> ", i, media);
+        
+        if (status == 0) {
+            a+= 1;
+        } else {
+            b+= 1;
+        }
+      System.out.println("Alunos aprovados: " + a);
+      System.out.println("Alunos reprovados: " + b);
+        }
+        
+    }
+    
+    
+    public static void main(String[] args) {
+        int opcao = 0;
+
+        do {
+            System.out.println("opcoes");
+            System.out.println("1. Cadastro aluno");
+            System.out.println("2. Media aluno");
+            System.out.println("3. Classificacao");
+            System.out.println("4. Relatorio final");
+            System.out.println("5. Sair");
+            System.out.print("Escolha uma opção: ");
+            opcao = scanner.nextInt();
+            
+            switch (opcao) {
+                case 1:
+                    cadastrarNotas();
+                    break;
+                    
+                case 2:
+                    exibirMedias();
+                    break;
+                    
+                case 3:
+                    exibirStatus();
+                    break;
+                    
+                case 4:
+                    relatorio();
+                    break;
+                    
+                case 5:
+                    System.out.println("sair");
+                    break;
+                    
+                default:
+                    System.out.println("Opção inválida!");
+                    break;
+            }   
+        } while (opcao != 5);
+    } 
+}
+
