@@ -1,0 +1,27 @@
+package javaapplication3;
+
+import java.util.Scanner;
+
+public class JavaApplication3 {
+    @SuppressWarnings("empty-statement")
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);        
+/*Chico is 1.50 meters tall and grows 2 centimeters per year, while Juca is 1.10 meters tall and grows 3 centimeters per year.
+Create an algorithm that calculates and prints how many years it will take for Juca to become taller than Chico.
+*/
+    {double Juca, Chico, anos;
+       
+      Chico = 1.50;
+      Juca = 1.10;
+      anos = 0;
+     
+      while(Chico >= Juca){
+          Chico += 0.02;
+          Juca += 0.03;
+          anos++;
+      }
+     
+      System.out.println("It took " + anos + "years");
+      System.out.println("Juca height is " + Juca);
+      System.out.println("Chico height is " + Chico);
+        }
